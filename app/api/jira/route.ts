@@ -6,8 +6,8 @@ import { NextResponse } from 'next/server';
 
 import { RecommendedItem } from '@/types/training-items';
 import bodyToMarkdown from '@/utilities/bodyToMarkdown';
+
 // import { trainingItems } from '@/data/training/gpt-recommendations/data.json';
-import { consoleLogger } from '@/utilities/consoleLogger';
 
 type BasicAuthentication = {
   email: string;
@@ -34,7 +34,7 @@ const client: Version3Client = new Version3Client({
 });
 
 export async function GET(): Promise<void> {
-  consoleLogger('Platform Domain', process.env.JIRA_DOMAIN);
+  consola.log('Platform Domain', process.env.JIRA_DOMAIN);
 
   try {
     const res: JiraApiResponse =
