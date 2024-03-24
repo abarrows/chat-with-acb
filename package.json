@@ -17,7 +17,7 @@
     "db:setup": "TS_NODE_COMPILER_OPTIONS='{ \"module\": \"commonjs\" }' yarn prisma migrate dev --name ${0}",
     "db:seed": "TS_NODE_COMPILER_OPTIONS='{ \"module\": \"commonjs\" }' yarn prisma/seed.ts",
     "setup": "corepack enable && yarn install docker-compose up -d && yarn db:migrate && yarn db generate && yarn db:deploy",
-    "dev": "yarn run concurrently \"docker-compose up && yarn run db:generate && yarn prisma studio\" \"next dev\"",
+    "dev": "yarn run concurrently \"docker-compose up\" \"yarn run db:generate\" \"next dev\"",
     "e2e:headless": "playwright test",
     "e2e:ui": "playwright test --ui",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
