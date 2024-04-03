@@ -53,7 +53,7 @@ export default async function saveTrainingDataInDatabase(
               },
               create: {
                 name: label.name.toLowerCase(),
-                categoryName: label.categoryName,
+                categoryName: label.categoryName.toLowerCase(),
               },
             })),
           },

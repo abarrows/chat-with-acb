@@ -1,8 +1,7 @@
-import React from 'react';
-
+import { trainingItem } from '@prisma/client';
 import { Metadata } from 'next';
-import Link from 'next/link';
 
+import Article from '@/components/Article/Article';
 import { database } from '@/utilities/prisma';
 
 export const metadata: Metadata = {
@@ -22,16 +21,18 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function Page({ params: { label, ...params } }) {
+export const revalidate = 1;
+
+export default async function Page({
+  params,
+}: {
+  params: { itemId: trainingItem['itemId'] };
+}) {
   // Retrieve all training items in the database that contain the label name in
   // the request
-  const dataItems = await database.trainingItem.findMany({
+  const dataItem = await database.trainingItem.findUniqueOrThrow({
     where: {
-      labels: {
-        some: {
-          name: label,
-        },
-      },
+      itemId: params.itemId,
     },
     include: {
       labels: true,
@@ -44,28 +45,13 @@ export default async function Page({ params: { label, ...params } }) {
         <div className='mx-auto grid max-w-screen-xl px-4 py-8 text-center lg:py-16'>
           <div className='mx-auto place-self-center'>
             <h1 className='mb-4 max-w-2xl text-4xl font-extrabold leading-none tracking-tight md:text-5xl xl:text-6xl dark:text-white'>
-              Training Items with Label {label}
+              Training Item: {dataItem.title}
             </h1>
           </div>
         </div>
       </section>
-      {/* Display an unordered list of all the training items with a given label */}
-      <dl>
-        {dataItems.map((item) => (
-          <React.Fragment key={item.itemId}>
-            <dt>
-              <Link href={`/training-items/${label}/${item.itemId}`}>
-                {item.title}
-              </Link>
-            </dt>
-            <dd>
-              <Link href={`/training-items/${label}/${item.itemId}`}>
-                {item.itemId}
-              </Link>
-            </dd>
-          </React.Fragment>
-        ))}
-      </dl>
+      {/* Display a list of all the training items with a given label */}
+      <Article itemId={dataItem.itemId} />
     </>
   );
 }

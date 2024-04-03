@@ -30,6 +30,7 @@ export default async function Page({ params: { label, ...params } }) {
       labels: {
         some: {
           name: label,
+          categoryName: params.category,
         },
       },
     },
@@ -49,7 +50,7 @@ export default async function Page({ params: { label, ...params } }) {
           </div>
         </div>
       </section>
-      {/* Display an unordered list of all the training items with a given label */}
+      {/* Display a list of all the training items with a given label */}
       <dl>
         {dataItems.map((item) => (
           <React.Fragment key={item.itemId}>

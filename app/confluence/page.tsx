@@ -2,10 +2,8 @@ import { SearchPageResponseSearchResult } from 'confluence.js/out/api/models';
 import consola from 'consola';
 import { Metadata } from 'next';
 
+import SortableTable from '@/commons/SortableTable/Table';
 import serviceRouteHandler from '@/components/serviceRouteHandler';
-import Table from '@/components/Table/Table';
-import saveTrainingData from '@/utilities/saveTrainingData';
-import saveTrainingDataInDatabase from '@/utilities/saveTrainingDataInDatabase';
 
 export const metadata: Metadata = {
   title: 'Confluence Article List',
@@ -37,8 +35,8 @@ export default async function Page() {
   const dataItems: SearchPageResponseSearchResult | null =
     await serviceRouteHandler('api/confluence');
   consola.info(`Retrieved ${dataItems.length}`);
-  saveTrainingDataInDatabase('confluence', dataItems);
-  saveTrainingData('confluence', dataItems);
+  // saveTrainingDataInDatabase('confluence', dataItems);
+  // saveTrainingData('confluence', dataItems);
   return (
     <>
       <section className='bg-white dark:bg-gray-900'>
@@ -48,7 +46,7 @@ export default async function Page() {
               Confluence Articles List
             </h1>
             <div className='overflow-x-auto'>
-              <Table items={dataItems} />
+              <SortableTable items={dataItems} />
             </div>
           </div>
         </div>

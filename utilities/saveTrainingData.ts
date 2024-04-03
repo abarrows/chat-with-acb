@@ -27,9 +27,13 @@ export default async function saveTrainingData(
     //   return rest;
     // });
     const itemsInJson = JSON.stringify(items, null, 2);
+    const sanitizedItemsInJson = itemsInJson.replace(
+      /\[data-colorid=[^\]]*\]/g,
+      '',
+    );
     fs.writeFileSync(
       `data/training/${platform}/data-all.json`,
-      itemsInJson,
+      sanitizedItemsInJson,
       'utf-8',
     );
   } catch (error) {

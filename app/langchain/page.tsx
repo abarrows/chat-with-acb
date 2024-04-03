@@ -1,9 +1,7 @@
 import { Metadata } from 'next';
-import Link from 'next/link';
 
-import Article from '@/components/Article/Article';
 import serviceRouteHandler from '@/components/serviceRouteHandler';
-import saveTrainingData, { TrainingItem } from '@/utilities/saveTrainingData';
+import saveTrainingData from '@/utilities/saveTrainingData';
 
 interface LangChainItem {
   title: string;
@@ -53,76 +51,7 @@ export default async function Page() {
             <h1 className='mb-4 max-w-2xl text-4xl font-extrabold leading-none tracking-tight md:text-5xl xl:text-6xl dark:text-white'>
               LangChain Articles List
             </h1>
-            <div className='overflow-x-auto'>
-              <table className='w-full whitespace-nowrap'>
-                <thead>
-                  <tr className='h-16 w-full text-sm leading-none text-gray-600'>
-                    <th className='font-normal text-left pl-1'>Index</th>
-                    <th className='font-normal text-left pl-1'>ID</th>
-                    <th className='font-normal text-left pl-1'>Key</th>
-                    <th className='font-normal text-left pl-4'>
-                      Title and Excerpt
-                    </th>
-                    <th className='font-normal text-left pl-1'>Url</th>
-                    <th className='font-normal text-left pl-1'>
-                      Original Labels
-                    </th>
-                    <th className='font-normal text-left pl-1'>
-                      Proficiencies
-                    </th>
-                    <th className='font-normal text-left pl-1'>Tools</th>
-                    <th className='font-normal text-left pl-1'>
-                      Advanced Skills
-                    </th>
-                    <th className='font-normal text-left pl-12'>Body</th>
-                  </tr>
-                </thead>
-                <tbody className='w-full'>
-                  {dataItems &&
-                    dataItems.map((item: TrainingItem, index: number) => (
-                      <tr
-                        className='h-20 text-sm leading-none text-gray-800 bg-white hover:bg-gray-100 border-y border-gray-100'
-                        key={`${index}-${item.id}-${item.key}`}
-                      >
-                        <td className='pl-4 cursor-pointer'>{index}</td>
-                        <td className='pl-1'>{item.id}</td>
-                        <td className='pl-1'>{item.key}</td>
-                        <td className='pl-1'>
-                          {item.title}
-                          <br />
-                          <br />
-                          {item.excerpt && <Article>{item.excerpt}</Article>}
-                        </td>
-                        <td className='pl-1'>
-                          <Link
-                            href={item.url}
-                            target='_blank'
-                            rel='noreferrer'
-                          >
-                            {item.url}
-                          </Link>
-                        </td>
-                        <td className='pl-1'>
-                          {item.labels &&
-                            item.labels.map((label: string, idx: number) => (
-                              <p key={idx}>{label.name}</p>
-                            ))}
-                        </td>
-                        <td className='font-normal text-left pl-1'></td>
-                        <td className='font-normal text-left pl-1'></td>
-                        <td className='font-normal text-left pl-1'></td>
-                        <td className='pl-1'>
-                          {item.body && (
-                            <Article>
-                              {item.body.replace(/<(?!br\s*\/?)[^>]+>/gi, '')}
-                            </Article>
-                          )}
-                        </td>
-                      </tr>
-                    ))}
-                </tbody>
-              </table>
-            </div>
+            <div className='overflow-x-auto'></div>
           </div>
         </div>
       </section>

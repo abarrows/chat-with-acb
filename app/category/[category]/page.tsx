@@ -22,14 +22,14 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function Page({ params: { label, ...params } }) {
+export default async function Page({ params: { category, ...params } }) {
   // Retrieve all training items in the database that contain the label name in
   // the request
   const dataItems = await database.trainingItem.findMany({
     where: {
       labels: {
         some: {
-          name: label,
+          categoryName: params.category,
         },
       },
     },
@@ -44,22 +44,22 @@ export default async function Page({ params: { label, ...params } }) {
         <div className='mx-auto grid max-w-screen-xl px-4 py-8 text-center lg:py-16'>
           <div className='mx-auto place-self-center'>
             <h1 className='mb-4 max-w-2xl text-4xl font-extrabold leading-none tracking-tight md:text-5xl xl:text-6xl dark:text-white'>
-              Training Items with Label {label}
+              Training Items with Label {category}
             </h1>
           </div>
         </div>
       </section>
-      {/* Display an unordered list of all the training items with a given label */}
+      {/* Display a list of all the training items with a given label */}
       <dl>
         {dataItems.map((item) => (
           <React.Fragment key={item.itemId}>
             <dt>
-              <Link href={`/training-items/${label}/${item.itemId}`}>
+              <Link href={`/category/${category}/${item.itemId}`}>
                 {item.title}
               </Link>
             </dt>
             <dd>
-              <Link href={`/training-items/${label}/${item.itemId}`}>
+              <Link href={`/category/${category}/${item.itemId}`}>
                 {item.itemId}
               </Link>
             </dd>
