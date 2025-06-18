@@ -18,6 +18,10 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: "${{ env.node_version }}"
+      - name: Enable Corepack and prepare Yarn
+        run: |
+          corepack enable
+          corepack prepare yarn@4.0.2 --activate
       - name: Install dependencies
         run: yarn install --frozen-lockfile
       - name: Install Playwright Browsers
