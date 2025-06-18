@@ -20,6 +20,10 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: "${{ env.node_version }}"
+      - name: Enable Corepack and prepare Yarn
+        run: |
+          corepack enable
+          corepack prepare yarn@4.0.2 --activate
       - name: Install dependencies
         run: yarn install --frozen-lockfile
       - name: Lint check
@@ -28,6 +32,13 @@ jobs:
         run: yarn prettier
       - name: Unit & Integration tests
         run: yarn test
+      - name: Generate coverage report
+        run: yarn test --coverage
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: coverage/
       - name: Smoke & Acceptance tests
         run: |
           yarn build-storybook --quiet

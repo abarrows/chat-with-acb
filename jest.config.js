@@ -9,6 +9,8 @@ const customJestConfig = {
   testEnvironment: 'jest-environment-jsdom',
   modulePathIgnorePatterns: ['<rootDir>/dist/'],
   testPathIgnorePatterns: ['<rootDir>/e2e'],
+  collectCoverage: true,
+  coverageDirectory: '<rootDir>/coverage',
 };
 
 module.exports = createJestConfig(customJestConfig);
