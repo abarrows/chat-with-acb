@@ -23,12 +23,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
-      - name: Set up node
+      - run: echo "node_version=$(cat .github/nodejs.version)" >> $GITHUB_ENV
+      - name: "use node ${{ env.node_version }}"
         uses: actions/setup-node@v3
         with:
-          node-version: "18.x"
-
+          node-version: "${{ env.node_version }}"
+      - name: Enable Corepack and prepare Yarn
+        run: |
+          corepack enable
+          corepack prepare yarn@4.0.2 --activate
       - name: Install dependencies
         run: yarn install --frozen-lockfile
 
