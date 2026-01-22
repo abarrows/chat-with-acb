@@ -16700,6 +16700,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"lodash@npm:^4.17.23":
+  version: 4.17.23
+  resolution: "lodash@npm:4.17.23"
+  checksum: 1264a90469f5bb95d4739c43eb6277d15b6d9e186df4ac68c3620443160fc669e2f14c11e7d8b2ccf078b81d06147c01a8ccced9aab9f9f63d50dcf8cace6bf6
+  languageName: node
+  linkType: hard
+
 "log-symbols@npm:^4.1.0":
   version: 4.1.0
   resolution: "log-symbols@npm:4.1.0"
@@ -17681,7 +17688,7 @@ __metadata:
     jira.js: "npm:^3.0.1"
     jscpd: "npm:^3.5.10"
     langchain: "npm:^0.1.2"
-    lodash: "npm:^4.17.21"
+    lodash: "npm:^4.17.23"
     madge: "npm:^6.1.0"
     mkdirp: "npm:^3.0.1"
     next: "npm:^14.0.3"
